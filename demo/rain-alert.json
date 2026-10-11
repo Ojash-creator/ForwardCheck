@@ -1,0 +1,170 @@
+{
+  "example": {
+    "id": "rain-alert",
+    "title": "Genuine weather alert",
+    "description": "A real-looking official alert. Expect: Supported.",
+    "text": "Heavy rain alert for coastal districts. Schools will remain closed on Monday as per the district administration. Stay indoors and avoid travel.",
+    "image_url": ""
+  },
+  "_note": "SYNTHETIC sample data written by hand in SerpApi's response shape. Domains ending in .example are fictional. Record real data with scripts/record_demo.py.",
+  "responses": {
+    "google": {
+      "organic_results": [
+        {
+          "title": "Heavy rain alert issued for coastal districts, schools closed Monday",
+          "link": "https://demo-gov.example/weather/coastal-alert",
+          "snippet": "Heavy rain alert for coastal districts. District administration confirmed schools will remain closed on Monday; residents advised to avoid travel.",
+          "date": "Oct 10, 2026",
+          "source": "demo-gov.example"
+        },
+        {
+          "title": "Coastal districts on heavy rain alert: what to know",
+          "link": "https://demo-news.example/coastal-rain-alert",
+          "snippet": "Heavy rain alert for coastal districts; schools closed Monday, stay indoors and avoid travel, says district administration.",
+          "date": "Oct 10, 2026",
+          "source": "demo-news.example"
+        }
+      ]
+    },
+    "google_news": {
+      "news_results": [
+        {
+          "title": "Schools to remain closed Monday in coastal districts after heavy rain alert",
+          "link": "https://demo-news.example/schools-closed-monday",
+          "snippet": "District administration confirmed schools will remain closed on Monday in coastal districts due to heavy rain.",
+          "date": "5 hours ago",
+          "source": {
+            "name": "demo-news.example"
+          }
+        }
+      ]
+    },
+    "youtube": {
+      "video_results": [
+        {
+          "title": "Coastal districts heavy rain alert: schools closed Monday",
+          "link": "https://www.youtube.com/watch?v=demo0004ddd",
+          "channel": {
+            "name": "Demo Local News"
+          },
+          "published_date": "3 hours ago",
+          "views": 5300
+        }
+      ]
+    },
+    "google_trends": {
+      "interest_over_time": {
+        "timeline_data": [
+          {
+            "date": "Week 1",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 5
+              }
+            ]
+          },
+          {
+            "date": "Week 2",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 4
+              }
+            ]
+          },
+          {
+            "date": "Week 3",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 6
+              }
+            ]
+          },
+          {
+            "date": "Week 4",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 5
+              }
+            ]
+          },
+          {
+            "date": "Week 5",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 7
+              }
+            ]
+          },
+          {
+            "date": "Week 6",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 6
+              }
+            ]
+          },
+          {
+            "date": "Week 7",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 8
+              }
+            ]
+          },
+          {
+            "date": "Week 8",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 9
+              }
+            ]
+          },
+          {
+            "date": "Week 9",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 10
+              }
+            ]
+          },
+          {
+            "date": "Week 10",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 14
+              }
+            ]
+          },
+          {
+            "date": "Week 11",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 30
+              }
+            ]
+          },
+          {
+            "date": "Week 12",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 61
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

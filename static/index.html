@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ForwardCheck</title>
+<style>
+  :root {
+    --bg:#f6f5f1; --card:#ffffff; --ink:#1c2321; --muted:#5d6b66; --line:#e2e0d8; --accent:#0f6b5c; --accent-ink:#ffffff;
+    --false:#b3261e; --mislead:#9a5b00; --unver:#4a5b66; --ok:#1e7a3c;
+    --false-bg:#fdecea; --mislead-bg:#fff3dc; --unver-bg:#e9eef1; --ok-bg:#e4f4e9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#121816; --card:#1a2220; --ink:#e8eeea; --muted:#9db0a8; --line:#2c3835; --accent:#3fb59f; --accent-ink:#06201b;
+      --false:#ff8a80; --mislead:#ffc266; --unver:#a9bcc7; --ok:#7fd49a;
+      --false-bg:#3a1c1a; --mislead-bg:#3a2c12; --unver-bg:#222d33; --ok-bg:#16301f; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Devanagari",sans-serif; }
+  .wrap { max-width:880px; margin:0 auto; padding:24px 16px 64px; }
+  header { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  h1 { font-size:28px; margin:0; letter-spacing:-.02em; }
+  h1 span { color:var(--accent); }
+  .tag { color:var(--muted); margin:4px 0 0; }
+  .mode { font-size:13px; padding:4px 10px; border-radius:99px; border:1px solid var(--line); background:var(--card); color:var(--muted); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; margin-top:16px; }
+  label { display:block; font-weight:600; font-size:14px; margin-bottom:6px; }
+  textarea, input[type=url] { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--ink); border-radius:10px; padding:10px 12px; font:inherit; }
+  textarea { min-height:130px; resize:vertical; }
+  textarea:focus, input:focus, button:focus-visible { outline:2px solid var(--accent); outline-offset:1px; }
+  .row { display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin-top:12px; }
+  .row label.chk { font-weight:400; display:flex; gap:6px; align-items:center; margin:0; font-size:14px; }
+  .chips { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 12px; }
+  .chip { border:1px solid var(--line); background:var(--bg); color:var(--ink); border-radius:99px; padding:6px 12px; font-size:13px; cursor:pointer; }
+  .chip:hover { border-color:var(--accent); }
+  button.primary { background:var(--accent); color:var(--accent-ink); border:0; border-radius:10px; padding:11px 20px; font:inherit; font-weight:600; cursor:pointer; }
+  button.primary[disabled] { opacity:.6; cursor:wait; }
+  button.ghost { background:transparent; border:1px solid var(--line); color:var(--ink); border-radius:8px; padding:7px 12px; font:inherit; font-size:14px; cursor:pointer; text-decoration:none; display:inline-block; }
+  .verdict { border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:8px; }
+  .v-likely_false { background:var(--false-bg); color:var(--false); }
+  .v-misleading { background:var(--mislead-bg); color:var(--mislead); }
+  .v-unverified { background:var(--unver-bg); color:var(--unver); }
+  .v-supported { background:var(--ok-bg); color:var(--ok); }
+  .verdict .big { font-size:26px; font-weight:800; letter-spacing:-.01em; }
+  .verdict .head { color:var(--ink); }
+  .meter { height:8px; background:rgba(127,127,127,.25); border-radius:99px; overflow:hidden; }
+  .meter > i { display:block; height:100%; background:currentColor; }
+  .conf { font-size:13px; color:var(--ink); }
+  ul.reasons { margin:12px 0 0; padding-left:20px; }
+  h2 { font-size:15px; margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+  pre.reply { white-space:pre-wrap; word-break:break-word; background:var(--bg); border:1px dashed var(--line); border-radius:10px; padding:12px; margin:0 0 10px; font:inherit; }
+  .item { padding:10px 0; border-top:1px solid var(--line); }
+  .item:first-of-type { border-top:0; }
+  .item a { color:var(--ink); font-weight:600; text-decoration:none; }
+  .item a:hover { text-decoration:underline; }
+  .meta { font-size:13px; color:var(--muted); }
+  .st { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:2px 7px; border-radius:99px; margin-right:6px; background:var(--unver-bg); color:var(--unver); }
+  .st.refutes, .st.debunks { background:var(--false-bg); color:var(--false); }
+  .st.supports { background:var(--ok-bg); color:var(--ok); }
+  .st.fact-checked { background:var(--mislead-bg); color:var(--mislead); }
+  .st.spreading { background:var(--mislead-bg); color:var(--mislead); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:640px){ .two { grid-template-columns:1fr; } }
+  .warn { background:var(--mislead-bg); color:var(--mislead); border-radius:10px; padding:10px 12px; margin-top:12px; font-size:14px; }
+  .err { background:var(--false-bg); color:var(--false); border-radius:10px; padding:10px 12px; margin-top:12px; }
+  details summary { cursor:pointer; color:var(--muted); font-size:14px; }
+  code { background:var(--bg); padding:1px 5px; border-radius:5px; font-size:13px; }
+  footer { margin-top:28px; color:var(--muted); font-size:13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Forward<span>Check</span></h1>
+      <p class="tag">Paste a WhatsApp forward. Get a verdict backed by live search evidence.</p>
+    </div>
+    <span class="mode" id="mode">loading…</span>
+  </header>
+
+  <section class="card">
+    <div class="chips" id="chips" aria-label="Examples"></div>
+    <label for="text">Forwarded message (English, Hindi or Hinglish)</label>
+    <textarea id="text" placeholder="Paste the message here…"></textarea>
+    <div style="margin-top:12px">
+      <label for="img">Image URL (optional, must be a public link)</label>
+      <input id="img" type="url" placeholder="https://…/photo.jpg">
+    </div>
+    <div class="row">
+      <label class="chk"><input type="checkbox" id="yt" checked> YouTube check</label>
+      <label class="chk"><input type="checkbox" id="tr" checked> Trends check</label>
+      <label class="chk" id="sampleWrap"><input type="checkbox" id="sample"> Use saved sample data (no credits)</label>
+      <span style="flex:1"></span>
+      <button class="primary" id="go">Check this forward</button>
+    </div>
+    <div id="msg"></div>
+  </section>
+
+  <div id="result"></div>
+
+  <footer>
+    ForwardCheck is an evidence aggregator, not a final judge. It shows what search results say and why;
+    always open the sources. Built for the SerpApi India Hackathon 2026.
+  </footer>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl = u => /^https?:\/\//i.test(u) ? u : "#";
+let health = {}, examples = [], selected = null;
+
+async function init() {
+  try { health = await (await fetch("/api/health")).json(); } catch { health = {}; }
+  try { examples = await (await fetch("/api/examples")).json(); } catch { examples = []; }
+  $("#mode").textContent = health.live ? "Live · SerpApi" + (health.llm ? " + Claude" : "") : "Sample mode · no SerpApi key yet";
+  $("#sample").checked = !health.live;
+  $("#chips").innerHTML = examples.map((e, i) => `<button class="chip" data-i="${i}">${esc(e.title)}</button>`).join("");
+  $("#chips").addEventListener("click", ev => {
+    const b = ev.target.closest(".chip"); if (!b) return;
+    selected = examples[+b.dataset.i];
+    $("#text").value = selected.text; $("#img").value = selected.image_url || "";
+  });
+  $("#text").addEventListener("input", () => { selected = null; });
+}
+
+$("#go").addEventListener("click", async () => {
+  const btn = $("#go"), msg = $("#msg");
+  msg.innerHTML = ""; btn.disabled = true; btn.textContent = "Checking…";
+  const useSample = $("#sample").checked && !!selected;
+  if ($("#sample").checked && !selected) {
+    msg.innerHTML = '<div class="err">Pick an example above to use sample data, or untick the box to run a live check.</div>';
+    btn.disabled = false; btn.textContent = "Check this forward"; return;
+  }
+  try {
+    const r = await fetch("/api/check", { method:"POST", headers:{"content-type":"application/json"},
+      body: JSON.stringify({ text:$("#text").value, image_url:$("#img").value, example_id:selected?.id,
+        use_sample:useSample, use_youtube:$("#yt").checked, use_trends:$("#tr").checked }) });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.detail || "Something went wrong");
+    render(data);
+  } catch (e) {
+    msg.innerHTML = `<div class="err">${esc(e.message)}</div>`;
+  } finally { btn.disabled = false; btn.textContent = "Check this forward"; }
+});
+
+function item(it, extra = "") {
+  const sub = [it.source || it.domain, it.date || it.published, extra].filter(Boolean).map(esc).join(" · ");
+  return `<div class="item">${it.stance ? `<span class="st ${esc(it.stance)}">${esc(it.stance)}</span>` : ""}
+    <a href="${esc(safeUrl(it.link))}" target="_blank" rel="noopener noreferrer">${esc(it.title || it.link)}</a>
+    ${it.snippet ? `<div class="meta">${esc(it.snippet)}</div>` : ""}<div class="meta">${sub}</div></div>`;
+}
+const section = (title, body) => body ? `<section class="card"><h2>${esc(title)}</h2>${body}</section>` : "";
+
+function spark(t) {
+  if (!t || !t.points.length) return "";
+  const W = 560, H = 70, max = Math.max(...t.points.map(p => p.value), 1), n = t.points.length;
+  const pts = t.points.map((p, i) => `${(i / Math.max(n - 1, 1) * W).toFixed(1)},${(H - 6 - p.value / max * (H - 12)).toFixed(1)}`).join(" ");
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Search interest over the last 12 months">
+      <polyline fill="none" stroke="currentColor" stroke-width="2" points="${pts}" style="color:var(--accent)"/></svg>
+    <div class="meta">Peak interest: ${esc(t.peak)}${t.first_rise ? ` · first strong rise: ${esc(t.first_rise)}` : ""}</div>`;
+}
+
+function render(d) {
+  const ev = d.evidence, img = ev.image;
+  const conflict = d.conflict && (d.refuting.length && d.supporting.length)
+    ? `<section class="card"><h2>Source disagreement</h2><div class="two">
+        <div><strong>Say it's wrong</strong>${d.refuting.map(i => item(i)).join("")}</div>
+        <div><strong>Say it's right</strong>${d.supporting.map(i => item(i)).join("")}</div></div></section>` : "";
+  $("#result").innerHTML = `
+    <section class="card">
+      <div class="verdict v-${esc(d.verdict)}">
+        <div class="big">${esc(d.label)}</div>
+        <div class="head">${esc(d.headline)}</div>
+        <div class="meter" aria-hidden="true"><i style="width:${+d.confidence}%"></i></div>
+        <div class="conf">Confidence: ${esc(d.confidence_label)} (${+d.confidence}%) · evidence score against ${esc(d.scores.debunk)} / for ${esc(d.scores.support)}</div>
+      </div>
+      <ul class="reasons">${d.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
+      ${d.errors.length ? `<div class="warn">Some searches failed: ${d.errors.map(esc).join(" · ")}</div>` : ""}
+      ${d.mode === "sample" ? `<div class="warn">Sample mode: showing saved, synthetic example data, not live search results.</div>` : ""}
+    </section>
+    <section class="card"><h2>Reply you can send back</h2>
+      <pre class="reply" id="reply">${esc(d.reply)}</pre>
+      <button class="ghost" id="copy">Copy reply</button>
+      <a class="ghost" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text=${encodeURIComponent(d.reply)}">Open in WhatsApp</a>
+    </section>
+    ${conflict}
+    ${section("Fact-checkers and web", ev.web.map(i => item(i)).join(""))}
+    ${section("News coverage", ev.news.map(i => item(i)).join(""))}
+    ${img ? section("Image provenance (Google Lens)",
+      `${img.notes.length ? `<ul class="reasons">${img.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>` : '<div class="meta">No red flags found in image matches.</div>'}
+       ${img.matches.map(i => item(i)).join("")}`) : ""}
+    ${section("YouTube", ev.videos.map(v => item(v, v.channel)).join(""))}
+    ${section("Search interest over time (Google Trends)", spark(ev.trend))}
+    <section class="card"><details><summary>How this was computed</summary>
+      <p class="meta">Claims extracted by ${esc(d.extraction_method)}. ${d.credits_used} SerpApi credit(s) used · ${d.elapsed_ms} ms.</p>
+      <ul>${d.claims.map(c => `<li>${esc(c.claim)} → <code>${esc(c.query)}</code></li>`).join("")}</ul>
+      <ul>${d.queries.map(q => `<li><code>${esc(q.engine)}</code> ${esc(q.q || q.search_query || q.url || "")}</li>`).join("")}</ul>
+    </details></section>`;
+  $("#copy").onclick = async e => { try { await navigator.clipboard.writeText(d.reply); e.target.textContent = "Copied ✓"; } catch { e.target.textContent = "Copy failed"; } };
+  $("#result").scrollIntoView({ behavior:"smooth", block:"start" });
+}
+init();
+</script>
+</body>
+</html>

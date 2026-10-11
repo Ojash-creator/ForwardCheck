@@ -1,0 +1,192 @@
+{
+  "example": {
+    "id": "flood-photo",
+    "title": "Recycled flood photo",
+    "description": "Old photo shared as 'right now'. Expect: image provenance flags it.",
+    "text": "Shocking! This is the flood in our city right now, see how the whole city has drowned. Share so everyone is aware.",
+    "image_url": "https://example.com/flood-photo.jpg"
+  },
+  "_note": "SYNTHETIC sample data written by hand in SerpApi's response shape. Domains ending in .example are fictional. Record real data with scripts/record_demo.py.",
+  "responses": {
+    "google": {
+      "organic_results": [
+        {
+          "title": "Fact Check: old flood photo shared as recent city flood",
+          "link": "https://demo-factcheck.example/old-flood-photo",
+          "snippet": "The viral photo claiming to show the flood in the city right now is old and unrelated; it was taken during 2018 flooding elsewhere.",
+          "date": "Oct 6, 2026",
+          "source": "demo-factcheck.example"
+        },
+        {
+          "title": "Photos of city flood shared on social media: what we know",
+          "link": "https://demo-blog.example/city-flood-photos",
+          "snippet": "A collection of flood photos circulating online.",
+          "date": "",
+          "source": "demo-blog.example"
+        }
+      ]
+    },
+    "google_news": {
+      "news_results": [
+        {
+          "title": "Old flood photos circulate as recent city flood, officials urge caution",
+          "link": "https://demo-news.example/old-flood-photos-circulate",
+          "snippet": "Several images of the flood in the city are recycled from earlier years and misleading.",
+          "date": "1 day ago",
+          "source": {
+            "name": "demo-news.example"
+          }
+        }
+      ]
+    },
+    "google_lens": {
+      "visual_matches": [
+        {
+          "title": "Fact Check: street flood photo is from 2018, not 2026",
+          "link": "https://demo-factcheck.example/flood-photo-2018",
+          "source": "demo-factcheck.example",
+          "snippet": ""
+        },
+        {
+          "title": "2018 flood archive: submerged streets gallery",
+          "link": "https://demo-news.example/archive/2018-flood-gallery",
+          "source": "demo-news.example",
+          "snippet": ""
+        },
+        {
+          "title": "Flood waters submerge city, 2018",
+          "link": "https://demo-blog.example/flood-2018",
+          "source": "demo-blog.example",
+          "snippet": ""
+        }
+      ]
+    },
+    "youtube": {
+      "video_results": [
+        {
+          "title": "City flood right now! Shocking footage",
+          "link": "https://www.youtube.com/watch?v=demo0003ccc",
+          "channel": {
+            "name": "Viral Alerts Demo"
+          },
+          "published_date": "1 day ago",
+          "views": 40300
+        }
+      ]
+    },
+    "google_trends": {
+      "interest_over_time": {
+        "timeline_data": [
+          {
+            "date": "Week 1",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 1
+              }
+            ]
+          },
+          {
+            "date": "Week 2",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 1
+              }
+            ]
+          },
+          {
+            "date": "Week 3",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 2
+              }
+            ]
+          },
+          {
+            "date": "Week 4",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 1
+              }
+            ]
+          },
+          {
+            "date": "Week 5",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 2
+              }
+            ]
+          },
+          {
+            "date": "Week 6",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 2
+              }
+            ]
+          },
+          {
+            "date": "Week 7",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 3
+              }
+            ]
+          },
+          {
+            "date": "Week 8",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 3
+              }
+            ]
+          },
+          {
+            "date": "Week 9",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 4
+              }
+            ]
+          },
+          {
+            "date": "Week 10",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 20
+              }
+            ]
+          },
+          {
+            "date": "Week 11",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 100
+              }
+            ]
+          },
+          {
+            "date": "Week 12",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 52
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

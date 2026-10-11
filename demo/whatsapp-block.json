@@ -1,0 +1,193 @@
+{
+  "example": {
+    "id": "whatsapp-block",
+    "title": "Chain message: 'forward or be blocked'",
+    "description": "Classic chain hoax. Expect: Likely false.",
+    "text": "URGENT!! WhatsApp will be BLOCKED for all users from tomorrow. Government order says only people who forward this message to 10 contacts will keep their account. Forward now to save your number!",
+    "image_url": ""
+  },
+  "_note": "SYNTHETIC sample data written by hand in SerpApi's response shape. Domains ending in .example are fictional. Record real data with scripts/record_demo.py.",
+  "responses": {
+    "google": {
+      "organic_results": [
+        {
+          "title": "Fact Check: No, WhatsApp is not blocking accounts of users who don't forward a message to 10 contacts",
+          "link": "https://demo-factcheck.example/whatsapp-block-hoax",
+          "snippet": "A viral message claims WhatsApp will be blocked for all users tomorrow unless they forward it to 10 contacts. The claim is false and baseless; no government order exists.",
+          "date": "Oct 3, 2026",
+          "source": "demo-factcheck.example"
+        },
+        {
+          "title": "Viral 'forward to 10 contacts or WhatsApp will be blocked' message is a hoax",
+          "link": "https://demo-news.example/viral-whatsapp-hoax",
+          "snippet": "Officials said the government order claimed in the forwarded message does not exist. It is a fake chain message.",
+          "date": "Oct 4, 2026",
+          "source": "demo-news.example"
+        },
+        {
+          "title": "Advisory: beware of chain messages claiming WhatsApp accounts will be blocked",
+          "link": "https://demo-gov.example/advisory/chain-messages",
+          "snippet": "No government order blocks WhatsApp users. Such forwarded messages are misleading and should not be shared.",
+          "date": "Oct 5, 2026",
+          "source": "demo-gov.example"
+        },
+        {
+          "title": "WhatsApp blocked tomorrow? Forward to 10 contacts",
+          "link": "https://demo-blog.example/whatsapp-blocked-tomorrow",
+          "snippet": "Forward this message to 10 contacts to keep your WhatsApp account safe.",
+          "date": "",
+          "source": "demo-blog.example"
+        }
+      ]
+    },
+    "google_news": {
+      "news_results": [
+        {
+          "title": "Hoax alert: WhatsApp will not be blocked tomorrow, users should ignore forwarded message",
+          "link": "https://demo-news.example/hoax-alert-whatsapp",
+          "snippet": "The viral message about a government order blocking WhatsApp accounts is fake.",
+          "date": "2 days ago",
+          "source": {
+            "name": "demo-news.example"
+          }
+        }
+      ]
+    },
+    "youtube": {
+      "video_results": [
+        {
+          "title": "WhatsApp blocked tomorrow? Fake forwarded message explained",
+          "link": "https://www.youtube.com/watch?v=demo0001aaa",
+          "channel": {
+            "name": "Demo Tech Explained"
+          },
+          "published_date": "2 days ago",
+          "views": 18200
+        },
+        {
+          "title": "WhatsApp will be BLOCKED tomorrow!! Forward this to 10 contacts NOW",
+          "link": "https://www.youtube.com/watch?v=demo0002bbb",
+          "channel": {
+            "name": "Viral Alerts Demo"
+          },
+          "published_date": "4 days ago",
+          "views": 91500
+        }
+      ]
+    },
+    "google_trends": {
+      "interest_over_time": {
+        "timeline_data": [
+          {
+            "date": "Week 1",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 2
+              }
+            ]
+          },
+          {
+            "date": "Week 2",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 3
+              }
+            ]
+          },
+          {
+            "date": "Week 3",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 2
+              }
+            ]
+          },
+          {
+            "date": "Week 4",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 4
+              }
+            ]
+          },
+          {
+            "date": "Week 5",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 3
+              }
+            ]
+          },
+          {
+            "date": "Week 6",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 5
+              }
+            ]
+          },
+          {
+            "date": "Week 7",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 6
+              }
+            ]
+          },
+          {
+            "date": "Week 8",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 8
+              }
+            ]
+          },
+          {
+            "date": "Week 9",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 12
+              }
+            ]
+          },
+          {
+            "date": "Week 10",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 35
+              }
+            ]
+          },
+          {
+            "date": "Week 11",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 100
+              }
+            ]
+          },
+          {
+            "date": "Week 12",
+            "values": [
+              {
+                "query": "q",
+                "extracted_value": 64
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
