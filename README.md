@@ -5,7 +5,6 @@
 Built for the [SerpApi India Hackathon 2026](https://serpapi.com/) · Python · FastAPI · SerpApi (Google, Google News, Google Lens, YouTube, Google Trends)
 
 > **Repo:** https://github.com/Ojash-creator/ForwardCheck  
-> **Demo video:** YOUR_DEMO_VIDEO_URL
 
 ---
 
